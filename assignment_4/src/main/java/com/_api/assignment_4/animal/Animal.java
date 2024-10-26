@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Animal {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int animalId;
 
     @Column(nullable = false)

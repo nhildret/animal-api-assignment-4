@@ -20,9 +20,7 @@ public class AnimalService {
      *
      * @return the list of all Animals.
      */
-    public List<Animal> getAllAnimals() {
-        return animalRepository.findAll();
-    }
+    public List<Animal> getAllAnimals() { return animalRepository.findAll(); }
 
     /**
      * Fetch a unique Animal.
@@ -30,9 +28,7 @@ public class AnimalService {
      * @param animalId the unique Animal id.
      * @return a unique Animal object.
      */
-    public Animal getAnimalById(int animalId) {
-        return animalRepository.findById(animalId).orElse(null);
-    }
+    public Animal getAnimalById(int animalId) { return animalRepository.findById(animalId).orElse(null); }
 
     /**
      * Fetch all animals whose class matches the search term.
@@ -40,9 +36,7 @@ public class AnimalService {
      * @param animalClass the search key.
      * @return the list of matching Animals.
      */
-    public List<Animal> getAnimalsByClass(String animalClass) {
-        return animalRepository.findByAnimalClass(animalClass);
-    }
+    public List<Animal> getAnimalsByClass(String animalClass) { return animalRepository.findByAnimalClass(animalClass); }
 
     /**
      * Search for Animals whose name contains a string.
@@ -50,17 +44,14 @@ public class AnimalService {
      * @param name the search key.
      * @return the list of matching Animals.
      */
-    public List<Animal> searchAnimalsByName(String name) {
-        return animalRepository.findByNameContainingIgnoreCase(name);
-    }
+    public List<Animal> searchAnimalsByName(String name) { return animalRepository.searchAnimalsByName(name); }
 
     /**
      * Add a new Animal to the database.
      *
      * @param animal the new Animal to add.
      */
-    public Animal saveAnimal(Animal animal) {
-        return animalRepository.save(animal);
+    public void saveAnimal(Animal animal) { animalRepository.save(animal);
     }
 
     /**
@@ -69,18 +60,15 @@ public class AnimalService {
      * @param animalId the unique Animal Id.
      * @param animal   the new Animal details.
      */
-    public Animal updateAnimal(int animalId, Animal animal) {
+    public void updateAnimal(int animalId, Animal animal) {
         Animal existing = getAnimalById(animalId);
-        if (existing != null) {
-            existing.setName(animal.getName());
-            existing.setScientificName(animal.getScientificName());
-            existing.setAnimalClass(animal.getAnimalClass());
-            existing.setHabitat(animal.getHabitat());
-            existing.setDescription(animal.getDescription());
+        existing.setName(animal.getName());
+        existing.setScientificName(animal.getScientificName());
+        existing.setAnimalClass(animal.getAnimalClass());
+        existing.setHabitat(animal.getHabitat());
+        existing.setDescription(animal.getDescription());
 
-            return animalRepository.save(existing); // Save and return updated entity
-        }
-        return null; // Or throw an exception if not found
+        animalRepository.save(existing); // Save and return updated entity
     }
 
     /**
@@ -88,7 +76,5 @@ public class AnimalService {
      *
      * @param animalId the unique Animal Id.
      */
-    public void deleteAnimal(int animalId) {
-        animalRepository.deleteById(animalId);
-    }
+    public void deleteAnimal(int animalId) { animalRepository.deleteById(animalId); }
 }

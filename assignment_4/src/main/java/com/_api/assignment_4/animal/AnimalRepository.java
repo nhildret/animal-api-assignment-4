@@ -15,10 +15,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
     // Custom query to get animals by their class
     List<Animal> findByAnimalClass(String animalClass);
 
-    // Custom query to get animals whose name contains a specific string
-    List<Animal> findByNameContainingIgnoreCase(String name);
-
     // Native query to fetch animals with specific conditions, for example, those with non-null descriptions
-    @Query(value = "SELECT * FROM animal WHERE description IS NOT NULL", nativeQuery = true)
-    List<Animal> findAnimalsWithDescriptions();
+    @Query(value = "select * from animal a where a.name is not null", nativeQuery = true)
+    List<Animal> searchAnimalsByName(String name);
 }
